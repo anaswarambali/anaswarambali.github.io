@@ -50,15 +50,17 @@ ul li a:hover{
 	font-size:70px;
 }
 .button{
+	color: #fff;
 	position: absolute;
 	top: 83%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
 .btn{
+	color: grey;	
 	border: 1px solid #000 ;
+	border-color: grey;
 	padding: 10px 30px;
-	color: #000;
 	text-decoration: none;
 	transition: ease 0.5s;
 
