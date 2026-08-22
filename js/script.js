@@ -58,10 +58,13 @@
   const heroClock = document.getElementById('heroClock');
   function tickClock(){
     const now = new Date();
-    const h = String(now.getUTCHours()).padStart(2,'0');
-    const m = String(now.getUTCMinutes()).padStart(2,'0');
-    const s = String(now.getUTCSeconds()).padStart(2,'0');
-    heroClock.textContent = `${h}:${m}:${s} UTC`;
+    // India Standard Time = UTC+5:30, computed from UTC so it's correct regardless of visitor's local timezone
+    const istMillis = now.getTime() + (now.getTimezoneOffset() * 60000) + (5.5 * 3600000);
+    const ist = new Date(istMillis);
+    const h = String(ist.getHours()).padStart(2,'0');
+    const m = String(ist.getMinutes()).padStart(2,'0');
+    const s = String(ist.getSeconds()).padStart(2,'0');
+    heroClock.textContent = `${h}:${m}:${s} IST`;
   }
   tickClock();
   setInterval(tickClock, 1000);
