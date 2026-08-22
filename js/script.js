@@ -53,7 +53,7 @@
   revealEls.forEach(el => revealObserver.observe(el));
 
   /* ============================================================
-     HERO CLOCK (UTC)
+     HERO CLOCK (IST)
   ============================================================ */
   const heroClock = document.getElementById('heroClock');
   function tickClock(){
