@@ -9,7 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 
 <!-- Tailwind CSS (CDN) -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -31,11 +31,17 @@
           lav: {
             soft: '#c9b6ff',
             dim: '#8f7ac9',
+          },
+          gold: {
+            DEFAULT: '#d4af37',
+            soft: '#f0d78c',
+            dim: '#8a712a',
           }
         },
         fontFamily: {
           display: ['"Space Grotesk"', 'sans-serif'],
           body: ['"Inter"', 'sans-serif'],
+          serif: ['"Playfair Display"', 'serif'],
         },
       }
     }
@@ -161,7 +167,50 @@
     border:1px solid rgba(255,255,255,0.1);
   }
 
+  /* film grain overlay — pure SVG noise, no external asset */
+  .grain-overlay{
+    position:fixed; inset:0; z-index:40; pointer-events:none;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* gold accents */
+  .grad-gold{
+    background:linear-gradient(120deg,#f0d78c 0%, #d4af37 45%, #f0d78c 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .gold-line{ background:linear-gradient(90deg, transparent, #d4af37, transparent); height:1px; }
+  .gold-frame{
+    border:1px solid rgba(212,175,55,0.35);
+    box-shadow:0 0 0 1px rgba(212,175,55,0.08), 0 30px 60px -28px rgba(212,175,55,0.25);
+  }
+
+  /* portrait duotone treatment */
+  .portrait-img{
+    filter:grayscale(0.5) contrast(1.05) brightness(0.85);
+  }
+  .portrait-duo{
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(45,217,200,0.35), rgba(74,20,140,0.55));
+    mix-blend-mode:color;
+  }
+  .portrait-vignette{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(10,1,22,0.85) 100%);
+  }
+
+  /* editorial section background photography */
+  .editorial-bg{
+    background-size:cover; background-position:center;
+  }
+  .editorial-scrim{
+    position:absolute; inset:0;
+  }
+
+  .font-serif-italic{ font-family:'Playfair Display', serif; font-style:italic; }
+
   .reveal-init{ opacity:0; }
+
 
   .card-3d{ transform-style:preserve-3d; }
 
@@ -172,6 +221,8 @@
 </head>
 
 <body class="cosmic-bg text-[#e9e2ff] antialiased">
+
+<div class="grain-overlay"></div>
 
 <!-- ================= AMBIENT BLOBS (global, fixed) ================= -->
 <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
@@ -191,6 +242,7 @@
     <nav class="hidden md:flex items-center gap-8 text-sm text-[#c9c1e8]">
       <a href="#about" class="nav-link">About</a>
       <a href="#skills" class="nav-link">Skills</a>
+      <a href="#network" class="nav-link">Network</a>
       <a href="#experience" class="nav-link">Experience</a>
       <a href="#achievements" class="nav-link">Impact</a>
       <a href="#education" class="nav-link">Education</a>
@@ -206,6 +258,8 @@
 
   <!-- ================= HERO ================= -->
   <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-28 pb-20 overflow-hidden">
+    <div class="absolute inset-0 z-0 editorial-bg" style="background-image:url('https://picsum.photos/seed/anaswar-network/1920/1080');"></div>
+    <div class="editorial-scrim z-0" style="background:linear-gradient(180deg, rgba(10,1,22,0.88) 0%, rgba(10,1,22,0.93) 55%, #0a0116 100%);"></div>
     <div class="max-w-5xl mx-auto text-center relative z-10">
 
       <div id="heroStatus" class="reveal-init inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-mono text-teal-neon mb-8">
@@ -215,8 +269,10 @@
 
       <h1 class="reveal-init font-display font-bold leading-[0.95] tracking-tight">
         <span id="heroLine1" class="block text-[13vw] sm:text-[7rem] md:text-[8rem] grad-text">ANASWAR</span>
-        <span id="heroLine2" class="block text-[13vw] sm:text-[7rem] md:text-[8rem] grad-text -mt-3 md:-mt-6">A AMBALI</span>
+        <span id="heroLine2" class="block font-serif-italic font-semibold text-[10vw] sm:text-[5rem] md:text-[5.5rem] grad-gold -mt-2 md:-mt-3">A Ambali</span>
       </h1>
+
+      <div class="reveal-init gold-line w-24 mx-auto my-6" id="heroGoldLine"></div>
 
       <p id="heroRole" class="reveal-init font-display text-lg md:text-2xl text-lav-soft tracking-[0.15em] mt-6 uppercase">
         IT Administrator <span class="text-[#6d5f99] mx-2">·</span> Network &amp; Systems Engineer <span class="text-[#6d5f99] mx-2">·</span> Cyber Security Specialist
@@ -248,15 +304,16 @@
     <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-14 items-center">
 
       <div class="md:col-span-5 relative reveal-up">
-        <div class="relative mx-auto w-full max-w-sm aspect-[4/5] rounded-[2rem] glass p-2 card-3d">
-          <div class="w-full h-full rounded-[1.6rem] flex flex-col items-center justify-center gap-4 relative overflow-hidden" style="background:linear-gradient(160deg, rgba(45,217,200,0.12), rgba(201,182,255,0.08));">
-            <div class="w-28 h-28 rounded-full icon-chip flex items-center justify-center">
-              <i data-lucide="shield-check" class="w-12 h-12 text-teal-neon"></i>
+        <div class="relative mx-auto w-full max-w-sm aspect-[4/5] rounded-[2rem] gold-frame p-2 card-3d overflow-hidden">
+          <div class="relative w-full h-full rounded-[1.6rem] overflow-hidden" style="background:linear-gradient(160deg, #1a0638, #2a0b52);">
+            <img src="profile.jpg" alt="Anaswar A Ambali" class="w-full h-full object-cover object-top">
+            <div class="portrait-vignette"></div>
+            <div class="absolute bottom-5 left-5 right-5">
+              <span class="font-serif-italic text-xl text-white drop-shadow-lg">Anaswar A Ambali</span>
+              <span class="block text-[11px] font-mono tracking-[0.2em] text-teal-neon uppercase mt-1">IT Administrator</span>
             </div>
-            <span class="font-display font-semibold text-lav-soft tracking-wide">Cyber Forensics ·</span>
-            <span class="font-display font-semibold text-teal-neon tracking-wide -mt-4">Network Engineering</span>
           </div>
-          <div class="absolute -top-5 -right-5 glass rounded-2xl px-4 py-3 text-xs font-mono text-teal-neon shadow-lg">
+          <div class="absolute -top-5 -right-5 glass gold-frame rounded-2xl px-4 py-3 text-xs font-mono text-gold-soft shadow-lg">
             3+ yrs experience
           </div>
           <div class="absolute -bottom-5 -left-5 glass rounded-2xl px-4 py-3 text-xs font-mono text-lav-soft shadow-lg">
@@ -361,6 +418,29 @@
           <p class="text-sm text-[#a79bd1] leading-relaxed">PowerShell Scripting · Network Monitoring · IT Asset Management</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#0a0116" d="M0,50 C480,120 960,0 1440,60 L1440,100 L0,100 Z"></path></svg>
+  </div>
+
+  <!-- ================= NETWORK ARCHITECTURE ================= -->
+  <section id="network" class="relative px-6 py-24 md:py-32">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-xl mb-16 reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-teal-neon uppercase">// Network Architecture</span>
+        <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 leading-tight">Trace the path <span class="grad-text">a packet takes.</span></h2>
+        <p class="text-[#a79bd1] mt-4">Dual-ISP uplinks, load-balanced and policy-routed through the firewall to the core — hover any node for its role.</p>
+      </div>
+
+      <div class="relative glass rounded-[1.75rem] p-4 md:p-8 reveal-up overflow-hidden">
+        <svg id="topoSvg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet" class="w-full h-auto" aria-label="Network topology: dual ISP, firewall, core router"></svg>
+        <div id="topoTooltip" class="absolute pointer-events-none opacity-0 -translate-y-2 transition-all duration-200 glass gold-frame rounded-xl px-4 py-3 max-w-[220px] z-10">
+          <div id="topoTooltipTitle" class="font-mono text-xs text-teal-neon tracking-wide mb-1"></div>
+          <div id="topoTooltipBody" class="text-xs text-[#c9c1e8] leading-relaxed"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -513,24 +593,29 @@
         <h2 class="font-display font-bold text-3xl mt-4 mb-8 leading-tight">Verified</h2>
 
         <div class="space-y-3">
-          <div class="glass rounded-xl px-5 py-4 flex items-center justify-between gap-4">
-            <span class="text-sm font-medium">CompTIA A+ Cyber</span>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">CompTIA A+ Cyber</span>
             <span class="text-xs font-mono text-teal-neon whitespace-nowrap">CompTIA · Mar 2025</span>
           </div>
-          <div class="glass rounded-xl px-5 py-4 flex items-center justify-between gap-4">
-            <span class="text-sm font-medium">Technical Support Fundamentals</span>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">Technical Support Fundamentals</span>
             <span class="text-xs font-mono text-lav-soft whitespace-nowrap">Google · Jul 2024</span>
           </div>
-          <div class="glass rounded-xl px-5 py-4 flex items-center justify-between gap-4">
-            <span class="text-sm font-medium">Foundations of Cybersecurity</span>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">Foundations of Cybersecurity</span>
             <span class="text-xs font-mono text-teal-neon whitespace-nowrap">Google · Aug 2023</span>
           </div>
-          <div class="glass rounded-xl px-5 py-4 flex items-center justify-between gap-4">
-            <span class="text-sm font-medium">Play It Safe: Manage Security Risks</span>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">Play It Safe: Manage Security Risks</span>
             <span class="text-xs font-mono text-lav-soft whitespace-nowrap">Google · Oct 2023</span>
           </div>
-          <div class="glass rounded-xl px-5 py-4 flex items-center justify-between gap-4">
-            <span class="text-sm font-medium">EFFISM Professional Education Training</span>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">EFFISM Professional Education Training</span>
             <span class="text-xs font-mono text-teal-neon whitespace-nowrap">Aries Group · Oct 2023</span>
           </div>
         </div>
@@ -544,11 +629,13 @@
   </div>
 
   <!-- ================= CONTACT ================= -->
-  <section id="contact" class="relative px-6 py-28 md:py-36">
-    <div class="max-w-3xl mx-auto text-center reveal-up">
-      <span class="font-mono text-xs tracking-[0.25em] text-teal-neon uppercase">// Contact</span>
+  <section id="contact" class="relative px-6 py-28 md:py-36 overflow-hidden">
+    <div class="absolute inset-0 z-0 editorial-bg" style="background-image:url('https://picsum.photos/seed/anaswar-datacenter/1600/900');"></div>
+    <div class="editorial-scrim z-0" style="background:linear-gradient(180deg, #0a0116 0%, rgba(10,1,22,0.92) 30%, rgba(10,1,22,0.92) 70%, #0a0116 100%);"></div>
+    <div class="max-w-3xl mx-auto text-center reveal-up relative z-10 gold-frame rounded-[2rem] glass px-8 py-14 md:px-16 md:py-16">
+      <span class="font-mono text-xs tracking-[0.25em] text-gold-soft uppercase">// Contact</span>
       <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 mb-6 leading-tight">
-        LET'S BUILD SOMETHING <span class="grad-text">SECURE.</span>
+        LET'S BUILD SOMETHING <span class="grad-gold font-serif-italic">Secure.</span>
       </h2>
       <p class="text-[#c9c1e8] max-w-lg mx-auto mb-12">
         Have an infrastructure challenge, a network project, or a cybersecurity problem worth solving? I'd like to hear about it.
@@ -608,6 +695,7 @@
       .to('#heroStatus', { opacity:1, y:0, duration:0.8 }, 0.1)
       .fromTo('#heroLine1', { opacity:0, y:60, filter:'blur(8px)' }, { opacity:1, y:0, filter:'blur(0px)', duration:1.1 }, 0.25)
       .fromTo('#heroLine2', { opacity:0, y:60, filter:'blur(8px)' }, { opacity:1, y:0, filter:'blur(0px)', duration:1.1 }, 0.4)
+      .fromTo('#heroGoldLine', { opacity:0, scaleX:0 }, { opacity:1, scaleX:1, duration:0.8 }, 0.6)
       .to('#heroRole', { opacity:1, y:0, duration:0.9 }, 0.65)
       .to('#heroTagline', { opacity:1, y:0, duration:0.9 }, 0.8)
       .to('#heroCta', { opacity:1, y:0, duration:0.9 }, 0.95);
@@ -697,6 +785,134 @@
       });
     });
   }
+
+  /* ---------------- NETWORK TOPOLOGY DIAGRAM ---------------- */
+  (function buildTopology(){
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.getElementById('topoSvg');
+    const tooltip = document.getElementById('topoTooltip');
+    const tooltipTitle = document.getElementById('topoTooltipTitle');
+    const tooltipBody = document.getElementById('topoTooltipBody');
+    if (!svg) return;
+
+    const nodes = [
+      { id:'isp1',     label:'ISP 1',        x:90,  y:170, title:'ISP 1', desc:'Primary internet uplink — load-balanced with ISP 2 across active WAN links.' },
+      { id:'isp2',     label:'ISP 2',        x:90,  y:430, title:'ISP 2', desc:'Secondary uplink providing failover and extra bandwidth via Policy-Based Forwarding.' },
+      { id:'firewall', label:'Firewall',     x:330, y:300, title:'Firewall', desc:'Palo Alto next-gen firewall enforcing security zones and threat prevention across both uplinks.' },
+      { id:'core',     label:'Router / Core',x:560, y:300, title:'Router / Core', desc:'Core routing layer applying QoS and directing traffic to every distribution segment.' },
+      { id:'dist1',    label:'Distribution', x:800, y:150, title:'VLAN Segmentation', desc:'Distribution switching enforcing VLAN boundaries for the server and wireless segments.' },
+      { id:'dist2',    label:'Distribution', x:800, y:450, title:'VLAN Segmentation', desc:'A second distribution path for redundancy and isolated broadcast domains.' },
+      { id:'servers',  label:'Servers',      x:1040,y:90,  title:'Server Infrastructure', desc:'Virtualized servers and centralized, role-based file storage.' },
+      { id:'wifi',     label:'Wi-Fi APs',    x:1040,y:230, title:'Wireless Network', desc:'Enterprise access points with VLAN-mapped SSIDs and roaming.' },
+      { id:'monitor',  label:'Monitoring',   x:1040,y:370, title:'Monitoring', desc:'Network and asset monitoring watching every layer for faults and drift.' },
+      { id:'users',    label:'End Users',    x:1040,y:510, title:'End Users', desc:'Staff and department endpoints, segmented onto the appropriate VLAN.' },
+    ];
+    const edges = [
+      ['isp1','firewall'], ['isp2','firewall'],
+      ['firewall','core'],
+      ['core','dist1'], ['core','dist2'],
+      ['dist1','servers'], ['dist1','wifi'],
+      ['dist2','monitor'], ['dist2','users'],
+    ];
+    const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const edgesGroup = document.createElementNS(svgNS,'g');
+    const packetsGroup = document.createElementNS(svgNS,'g');
+    const nodesGroup = document.createElementNS(svgNS,'g');
+
+    edges.forEach(([a,b], i) => {
+      const na = byId[a], nb = byId[b];
+      const midX = (na.x + nb.x) / 2;
+      const d = `M ${na.x} ${na.y} C ${midX} ${na.y}, ${midX} ${nb.y}, ${nb.x} ${nb.y}`;
+      const path = document.createElementNS(svgNS,'path');
+      path.setAttribute('d', d);
+      path.setAttribute('id', `netedge-${i}`);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'rgba(201,182,255,0.22)');
+      path.setAttribute('stroke-width', '1.4');
+      edgesGroup.appendChild(path);
+
+      if (!reduce){
+        const packet = document.createElementNS(svgNS,'circle');
+        packet.setAttribute('r', 3);
+        packet.setAttribute('fill', '#2dd9c8');
+        packet.style.filter = 'drop-shadow(0 0 5px #2dd9c8)';
+        const anim = document.createElementNS(svgNS,'animateMotion');
+        anim.setAttribute('dur', `${2.6 + (i % 4) * 0.6}s`);
+        anim.setAttribute('repeatCount', 'indefinite');
+        anim.setAttribute('begin', `${(i % 5) * 0.4}s`);
+        const mpath = document.createElementNS(svgNS,'mpath');
+        mpath.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#netedge-${i}`);
+        mpath.setAttribute('href', `#netedge-${i}`);
+        anim.appendChild(mpath);
+        packet.appendChild(anim);
+        packetsGroup.appendChild(packet);
+      }
+    });
+
+    nodes.forEach(n => {
+      const g = document.createElementNS(svgNS,'g');
+      g.style.cursor = 'pointer';
+      g.setAttribute('tabindex','0');
+      g.setAttribute('role','button');
+      g.setAttribute('aria-label', n.title);
+
+      const glow = document.createElementNS(svgNS,'circle');
+      glow.setAttribute('cx', n.x); glow.setAttribute('cy', n.y); glow.setAttribute('r', 20);
+      glow.setAttribute('fill', 'rgba(45,217,200,0.07)');
+
+      const core = document.createElementNS(svgNS,'circle');
+      core.setAttribute('cx', n.x); core.setAttribute('cy', n.y); core.setAttribute('r', 8);
+      core.setAttribute('fill', '#120327');
+      core.setAttribute('stroke', '#2dd9c8');
+      core.setAttribute('stroke-width', '1.8');
+      core.style.transition = 'filter .3s, r .3s';
+
+      const label = document.createElementNS(svgNS,'text');
+      label.setAttribute('x', n.x);
+      label.setAttribute('y', n.y + 28);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('font-family', 'JetBrains Mono, monospace');
+      label.setAttribute('font-size', '12');
+      label.setAttribute('fill', '#c9c1e8');
+      label.textContent = n.label;
+
+      g.appendChild(glow); g.appendChild(core); g.appendChild(label);
+      nodesGroup.appendChild(g);
+
+      function showTip(){
+        const wrapRect = svg.closest('.glass').getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+        const scaleX = svgRect.width / 1200;
+        const scaleY = svgRect.height / 600;
+        const px = (svgRect.left - wrapRect.left) + n.x * scaleX;
+        const py = (svgRect.top - wrapRect.top) + n.y * scaleY;
+        tooltip.style.left = px + 'px';
+        tooltip.style.top = (py - 14) + 'px';
+        tooltip.style.transform = 'translate(-50%, -100%)';
+        tooltipTitle.textContent = n.title;
+        tooltipBody.textContent = n.desc;
+        tooltip.classList.remove('opacity-0');
+        tooltip.classList.add('opacity-100');
+        core.style.filter = 'drop-shadow(0 0 10px #2dd9c8)';
+      }
+      function hideTip(){
+        tooltip.classList.add('opacity-0');
+        tooltip.classList.remove('opacity-100');
+        core.style.filter = '';
+      }
+      g.addEventListener('mouseenter', showTip);
+      g.addEventListener('mouseleave', hideTip);
+      g.addEventListener('focus', showTip);
+      g.addEventListener('blur', hideTip);
+      g.addEventListener('click', showTip);
+    });
+
+    svg.appendChild(edgesGroup);
+    svg.appendChild(packetsGroup);
+    svg.appendChild(nodesGroup);
+  })();
 </script>
 </body>
 </html>
