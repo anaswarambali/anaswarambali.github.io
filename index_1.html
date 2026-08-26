@@ -3,476 +3,916 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anaswar A Ambali</title>
-<meta name="description" content="Anaswar A Ambali — IT Systems Engineer specializing in Network Architecture, IT Infrastructure and Cybersecurity.">
+<title>Anaswar A Ambali | IT Administrator · Network & Systems Engineer · Cyber Security Specialist</title>
+<meta name="description" content="Anaswar A Ambali — IT Administrator, Network & Systems Engineer and Cyber Security Specialist. Firewall administration, VLAN/QoS design, virtualization, disaster recovery and automation.">
+<meta name="theme-color" content="#0d0221">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cosmic: {
+            void: '#0a0116',
+            deep: '#120327',
+            base: '#1a0638',
+            mid: '#2a0b52',
+          },
+          teal: {
+            neon: '#2dd9c8',
+            dim: '#1a8f83',
+          },
+          lav: {
+            soft: '#c9b6ff',
+            dim: '#8f7ac9',
+          },
+          gold: {
+            DEFAULT: '#d4af37',
+            soft: '#f0d78c',
+            dim: '#8a712a',
+          }
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+          serif: ['"Playfair Display"', 'serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<!-- GSAP + ScrollTrigger (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Lucide Icons (CDN) -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  :root{
+    --cosmic-void:#0a0116;
+    --cosmic-deep:#120327;
+    --teal:#2dd9c8;
+    --lav:#c9b6ff;
+  }
+  *{ scroll-behavior:smooth; }
+  html,body{
+    background:var(--cosmic-void);
+    font-family:'Inter',sans-serif;
+    color:#e9e2ff;
+    overflow-x:hidden;
+  }
+  ::selection{ background:rgba(45,217,200,0.35); color:#fff; }
+
+  ::-webkit-scrollbar{ width:9px; }
+  ::-webkit-scrollbar-track{ background:var(--cosmic-void); }
+  ::-webkit-scrollbar-thumb{ background:linear-gradient(var(--teal),var(--lav)); border-radius:99px; }
+
+  h1,h2,h3,h4,.font-display{ font-family:'Space Grotesk',sans-serif; }
+
+  /* gradient text */
+  .grad-text{
+    background:linear-gradient(120deg,#fff 10%, var(--teal) 50%, var(--lav) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    background-size:200% 100%;
+  }
+
+  /* cosmic base gradient backdrop */
+  .cosmic-bg{
+    background:
+      radial-gradient(60% 50% at 15% 10%, rgba(45,217,200,0.14), transparent 60%),
+      radial-gradient(55% 45% at 85% 20%, rgba(201,182,255,0.13), transparent 60%),
+      radial-gradient(70% 60% at 50% 100%, rgba(74,20,140,0.35), transparent 70%),
+      linear-gradient(180deg, #0a0116 0%, #120327 45%, #170933 100%);
+  }
+
+  /* floating blobs */
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(70px);
+    opacity:0.55; pointer-events:none; will-change:transform;
+  }
+  .blob-teal{ background:radial-gradient(circle, rgba(45,217,200,0.55), transparent 70%); }
+  .blob-lav{ background:radial-gradient(circle, rgba(201,182,255,0.5), transparent 70%); }
+  .blob-purple{ background:radial-gradient(circle, rgba(124,58,237,0.55), transparent 70%); }
+
+  @keyframes floatY{
+    0%,100%{ transform:translateY(0) translateX(0); }
+    50%{ transform:translateY(-30px) translateX(18px); }
+  }
+  @keyframes floatY2{
+    0%,100%{ transform:translateY(0) translateX(0); }
+    50%{ transform:translateY(26px) translateX(-22px); }
+  }
+  .float-a{ animation:floatY 9s ease-in-out infinite; }
+  .float-b{ animation:floatY2 11s ease-in-out infinite; }
+
+  /* glass card */
+  .glass{
+    background:rgba(255,255,255,0.035);
+    border:1px solid rgba(255,255,255,0.09);
+    backdrop-filter:blur(18px);
+  }
+  .glass-teal-hover:hover{ border-color:rgba(45,217,200,0.5); box-shadow:0 30px 60px -30px rgba(45,217,200,0.35); }
+
+  /* nav link underline */
+  .nav-link{ position:relative; }
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0%; height:1.5px;
+    background:linear-gradient(90deg,var(--teal),var(--lav)); transition:width .35s cubic-bezier(.16,.84,.32,1);
+  }
+  .nav-link:hover::after{ width:100%; }
+
+  /* magnetic buttons */
+  .magnetic{ transition:transform .3s cubic-bezier(.16,.84,.32,1); will-change:transform; }
+
+  .btn-primary{
+    background:linear-gradient(120deg,var(--teal),#4fd1c5);
+    color:#04241f; box-shadow:0 0 0 1px rgba(45,217,200,0.3), 0 20px 40px -18px rgba(45,217,200,0.55);
+  }
+  .btn-ghost{
+    border:1px solid rgba(201,182,255,0.35); background:rgba(255,255,255,0.02);
+  }
+  .btn-ghost:hover{ border-color:var(--lav); background:rgba(201,182,255,0.08); }
+
+  /* organic svg divider wrapper */
+  .divider{ position:relative; line-height:0; }
+  .divider svg{ display:block; width:100%; height:auto; }
+
+  /* timeline line */
+  .timeline-line{
+    background:linear-gradient(var(--teal), var(--lav) 60%, transparent);
+  }
+
+  /* status pulse */
+  .pulse-dot{
+    box-shadow:0 0 0 0 rgba(45,217,200,0.6);
+    animation:pulse-ring 2.2s infinite;
+  }
+  @keyframes pulse-ring{
+    0%{ box-shadow:0 0 0 0 rgba(45,217,200,0.55); }
+    70%{ box-shadow:0 0 0 10px rgba(45,217,200,0); }
+    100%{ box-shadow:0 0 0 0 rgba(45,217,200,0); }
+  }
+
+  /* skill icon chip */
+  .icon-chip{
+    background:linear-gradient(135deg, rgba(45,217,200,0.16), rgba(201,182,255,0.1));
+    border:1px solid rgba(255,255,255,0.1);
+  }
+
+  /* film grain overlay — pure SVG noise, no external asset */
+  .grain-overlay{
+    position:fixed; inset:0; z-index:40; pointer-events:none;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* gold accents */
+  .grad-gold{
+    background:linear-gradient(120deg,#f0d78c 0%, #d4af37 45%, #f0d78c 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .gold-line{ background:linear-gradient(90deg, transparent, #d4af37, transparent); height:1px; }
+  .gold-frame{
+    border:1px solid rgba(212,175,55,0.35);
+    box-shadow:0 0 0 1px rgba(212,175,55,0.08), 0 30px 60px -28px rgba(212,175,55,0.25);
+  }
+
+  /* portrait duotone treatment */
+  .portrait-img{
+    filter:grayscale(0.5) contrast(1.05) brightness(0.85);
+  }
+  .portrait-duo{
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(45,217,200,0.35), rgba(74,20,140,0.55));
+    mix-blend-mode:color;
+  }
+  .portrait-vignette{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(10,1,22,0.85) 100%);
+  }
+
+  /* editorial section background photography */
+  .editorial-bg{
+    background-size:cover; background-position:center;
+  }
+  .editorial-scrim{
+    position:absolute; inset:0;
+  }
+
+  .font-serif-italic{ font-family:'Playfair Display', serif; font-style:italic; }
+
+  .reveal-init{ opacity:0; }
+
+
+  .card-3d{ transform-style:preserve-3d; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
-<body>
 
-<!-- ambient background layers -->
-<div class="bg-grid" aria-hidden="true"></div>
-<div class="bg-glow" aria-hidden="true"></div>
-<canvas id="particles" aria-hidden="true"></canvas>
+<body class="cosmic-bg text-[#e9e2ff] antialiased">
 
-<!-- progress bar -->
-<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<div class="grain-overlay"></div>
 
-<!-- NAV -->
-<header class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#hero" class="nav-brand">
-      <span class="nav-brand-mark">AA</span>
-      <span class="nav-brand-text">Anaswar A Ambali</span>
+<!-- ================= AMBIENT BLOBS (global, fixed) ================= -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+  <div class="blob blob-teal float-a" style="width:420px;height:420px; top:-100px; left:-120px;"></div>
+  <div class="blob blob-lav float-b" style="width:380px;height:380px; top:20%; right:-140px;"></div>
+  <div class="blob blob-purple float-a" style="width:500px;height:500px; bottom:5%; left:10%;"></div>
+  <div class="blob blob-teal float-b" style="width:340px;height:340px; bottom:-80px; right:5%;"></div>
+</div>
+
+<!-- ================= NAV ================= -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between py-5">
+    <a href="#hero" class="font-display font-bold text-lg flex items-center gap-2">
+      <span class="w-9 h-9 rounded-xl icon-chip flex items-center justify-center text-teal-neon text-xs font-mono">AA</span>
+      <span class="hidden sm:inline">Anaswar A Ambali</span>
     </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#about" data-nav>About</a>
-      <a href="#arsenal" data-nav>Arsenal</a>
-      <a href="#topology" data-nav>Network</a>
-      <a href="#experience" data-nav>Experience</a>
-      <a href="#projects" data-nav>Projects</a>
-      <a href="#security" data-nav>Security</a>
-      <a href="#contact" data-nav>Contact</a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-[#c9c1e8]">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#network" class="nav-link">Network</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#achievements" class="nav-link">Impact</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
-    <div class="nav-status">
-      <span class="status-dot"></span>
-      <span class="mono">SYSTEMS ONLINE</span>
-    </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="#contact" class="magnetic btn-primary hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold">
+      Let's Talk
+    </a>
   </div>
 </header>
 
-<main>
+<main class="relative z-10">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="hero">
-    <canvas id="topoCanvas" class="hero-canvas" aria-hidden="true"></canvas>
-    <div class="hero-inner">
-      <div class="hero-status reveal">
-        <span class="status-dot"></span>
-        <span class="mono">SYSTEMS ONLINE</span>
-        <span class="hero-status-divider">/</span>
-        <span class="mono hero-clock" id="heroClock">00:00:00 UTC</span>
+  <!-- ================= HERO ================= -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-28 pb-20 overflow-hidden">
+    <div class="absolute inset-0 z-0 editorial-bg" style="background-image:url('https://picsum.photos/seed/anaswar-network/1920/1080');"></div>
+    <div class="editorial-scrim z-0" style="background:linear-gradient(180deg, rgba(10,1,22,0.88) 0%, rgba(10,1,22,0.93) 55%, #0a0116 100%);"></div>
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+
+      <div id="heroStatus" class="reveal-init inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-mono text-teal-neon mb-8">
+        <span class="w-2 h-2 rounded-full bg-teal-neon pulse-dot"></span>
+        AVAILABLE FOR OPPORTUNITIES · KOCHI, INDIA
       </div>
 
-      <h1 class="hero-name reveal" style="--d:0.05s">
-        <span class="hero-name-line">ANASWAR A AMBALI</span>
+      <h1 class="reveal-init font-display font-bold leading-[0.95] tracking-tight">
+        <span id="heroLine1" class="block text-[13vw] sm:text-[7rem] md:text-[8rem] grad-text">ANASWAR</span>
+        <span id="heroLine2" class="block font-serif-italic font-semibold text-[10vw] sm:text-[5rem] md:text-[5.5rem] grad-gold -mt-2 md:-mt-3">A Ambali</span>
       </h1>
-      <p class="hero-role reveal" style="--d:0.15s">Lets do it</p>
 
-      <p class="hero-tagline reveal" style="--d:0.25s">Building secure, scalable and intelligent IT infrastructure.</p>
+      <div class="reveal-init gold-line w-24 mx-auto my-6" id="heroGoldLine"></div>
 
-      <div class="hero-cycle reveal" style="--d:0.3s">
-        <span class="mono hero-cycle-label">SPECIALIZING IN</span>
-        <span class="hero-cycle-word" id="cycleWord">Network Architecture</span>
+      <p id="heroRole" class="reveal-init font-display text-lg md:text-2xl text-lav-soft tracking-[0.15em] mt-6 uppercase">
+        IT Administrator <span class="text-[#6d5f99] mx-2">·</span> Network &amp; Systems Engineer <span class="text-[#6d5f99] mx-2">·</span> Cyber Security Specialist
+      </p>
+
+      <p id="heroTagline" class="reveal-init text-[#c9c1e8] max-w-xl mx-auto mt-6 text-base md:text-lg">
+        3+ years designing, securing and keeping multi-site infrastructure running — firewalls, virtualization, disaster recovery, and the automation that makes it all sustainable.
+      </p>
+
+      <div id="heroCta" class="reveal-init flex flex-wrap items-center justify-center gap-4 mt-10">
+        <a href="#experience" class="magnetic btn-primary px-8 py-4 rounded-full font-semibold text-sm">Explore My Work</a>
+        <a href="#contact" class="magnetic btn-ghost px-8 py-4 rounded-full font-semibold text-sm">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 z-10">
+      <span class="text-[10px] font-mono tracking-[0.3em] text-[#8f83b8]">SCROLL</span>
+      <i data-lucide="chevron-down" class="w-4 h-4 text-teal-neon animate-bounce"></i>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="divider -mt-1">
+    <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg"><path fill="#120327" d="M0,64 C240,120 480,0 720,32 C960,64 1200,120 1440,64 L1440,120 L0,120 Z"></path></svg>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="relative px-6 py-24 md:py-32" style="background:#120327;">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-14 items-center">
+
+      <div class="md:col-span-5 relative reveal-up">
+        <div class="relative mx-auto w-full max-w-sm aspect-[4/5] rounded-[2rem] gold-frame p-2 card-3d overflow-hidden">
+          <div class="relative w-full h-full rounded-[1.6rem] overflow-hidden" style="background:linear-gradient(160deg, #1a0638, #2a0b52);">
+            <img src="profile.jpg" alt="Anaswar A Ambali" class="w-full h-full object-cover object-top">
+            <div class="portrait-vignette"></div>
+            <div class="absolute bottom-5 left-5 right-5">
+              <span class="font-serif-italic text-xl text-white drop-shadow-lg">Anaswar A Ambali</span>
+              <span class="block text-[11px] font-mono tracking-[0.2em] text-teal-neon uppercase mt-1">IT Administrator</span>
+            </div>
+          </div>
+          <div class="absolute -top-5 -right-5 glass gold-frame rounded-2xl px-4 py-3 text-xs font-mono text-gold-soft shadow-lg">
+            3+ yrs experience
+          </div>
+          <div class="absolute -bottom-5 -left-5 glass rounded-2xl px-4 py-3 text-xs font-mono text-lav-soft shadow-lg">
+            200+ endpoints managed
+          </div>
+        </div>
       </div>
 
-      <div class="hero-cta reveal" style="--d:0.4s">
-        <a href="#projects" class="btn btn-primary magnetic">
-          <span>Explore My Work</span>
+      <div class="md:col-span-7 reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-teal-neon uppercase">// About</span>
+        <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 mb-6 leading-tight">
+          Infrastructure that <span class="grad-text">just keeps running.</span>
+        </h2>
+        <p class="text-[#c9c1e8] text-lg mb-4">
+          I'm an IT Administrator and Cyber Forensics specialist with 3+ years designing, securing and maintaining network infrastructure and endpoint environments across multi-site organizations.
+        </p>
+        <p class="text-[#a79bd1] mb-8">
+          My work spans firewall administration, VLAN and QoS design, virtualization, disaster recovery and PowerShell automation — the kind of work that measurably cuts ticket resolution time and procurement cost. I also bring a strong background in vendor management, IT policy documentation, and end-to-end helpdesk operations.
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="glass rounded-xl p-4 text-center">
+            <div class="font-display font-bold text-2xl text-teal-neon count-up" data-count="3">0</div>
+            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">Years+</div>
+          </div>
+          <div class="glass rounded-xl p-4 text-center">
+            <div class="font-display font-bold text-2xl text-lav-soft count-up" data-count="200">0</div>
+            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">Endpoints+</div>
+          </div>
+          <div class="glass rounded-xl p-4 text-center">
+            <div class="font-display font-bold text-2xl text-teal-neon count-up" data-count="3">0</div>
+            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">Offices</div>
+          </div>
+          <div class="glass rounded-xl p-4 text-center">
+            <div class="font-display font-bold text-2xl text-lav-soft count-up" data-count="30" data-suffix="%">0</div>
+            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">Cost Cut</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#0a0116" d="M0,40 C360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path></svg>
+  </div>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills" class="relative px-6 py-24 md:py-32">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-xl mb-16 reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-lav-soft uppercase">// Technical Arsenal</span>
+        <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 leading-tight">Every layer, <span class="grad-text">covered.</span></h2>
+      </div>
+
+      <div id="skillsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="skill-card glass glass-teal-hover rounded-2xl p-7 reveal-up transition-all duration-500">
+          <div class="w-12 h-12 rounded-xl icon-chip flex items-center justify-center mb-5">
+            <i data-lucide="network" class="w-6 h-6 text-teal-neon"></i>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3">Networking &amp; Security</h3>
+          <p class="text-sm text-[#a79bd1] leading-relaxed">TCP/IP · LAN/WAN · VLAN · DHCP · DNS · VPN · QoS · Load Balancing · PBF · Palo Alto Firewall · SonicWall · Fortinet</p>
+        </div>
+
+        <div class="skill-card glass glass-teal-hover rounded-2xl p-7 reveal-up transition-all duration-500">
+          <div class="w-12 h-12 rounded-xl icon-chip flex items-center justify-center mb-5">
+            <i data-lucide="server" class="w-6 h-6 text-lav-soft"></i>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3">Infrastructure</h3>
+          <p class="text-sm text-[#a79bd1] leading-relaxed">Aruba · UniFi · Ruijie · HPE · Avaya · Access Control · Virtualization · Blackmagic</p>
+        </div>
+
+        <div class="skill-card glass glass-teal-hover rounded-2xl p-7 reveal-up transition-all duration-500">
+          <div class="w-12 h-12 rounded-xl icon-chip flex items-center justify-center mb-5">
+            <i data-lucide="cloud" class="w-6 h-6 text-teal-neon"></i>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3">Cloud &amp; Collaboration</h3>
+          <p class="text-sm text-[#a79bd1] leading-relaxed">Microsoft 365 · Teams · OneDrive · Domain &amp; Mail Administration · Zoho Mail · Zoho Books</p>
+        </div>
+
+        <div class="skill-card glass glass-teal-hover rounded-2xl p-7 reveal-up transition-all duration-500">
+          <div class="w-12 h-12 rounded-xl icon-chip flex items-center justify-center mb-5">
+            <i data-lucide="hard-drive" class="w-6 h-6 text-lav-soft"></i>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3">Storage Systems</h3>
+          <p class="text-sm text-[#a79bd1] leading-relaxed">TrueNAS · NAS · Synology · QNAP · WD · File Server Administration</p>
+        </div>
+
+        <div class="skill-card glass glass-teal-hover rounded-2xl p-7 reveal-up transition-all duration-500">
+          <div class="w-12 h-12 rounded-xl icon-chip flex items-center justify-center mb-5">
+            <i data-lucide="shield-check" class="w-6 h-6 text-teal-neon"></i>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3">Security Operations</h3>
+          <p class="text-sm text-[#a79bd1] leading-relaxed">Antivirus · EDR · Patch Management · Backup &amp; Disaster Recovery</p>
+        </div>
+
+        <div class="skill-card glass glass-teal-hover rounded-2xl p-7 reveal-up transition-all duration-500">
+          <div class="w-12 h-12 rounded-xl icon-chip flex items-center justify-center mb-5">
+            <i data-lucide="terminal" class="w-6 h-6 text-lav-soft"></i>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3">Automation &amp; Monitoring</h3>
+          <p class="text-sm text-[#a79bd1] leading-relaxed">PowerShell Scripting · Network Monitoring · IT Asset Management</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#0a0116" d="M0,50 C480,120 960,0 1440,60 L1440,100 L0,100 Z"></path></svg>
+  </div>
+
+  <!-- ================= NETWORK ARCHITECTURE ================= -->
+  <section id="network" class="relative px-6 py-24 md:py-32">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-xl mb-16 reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-teal-neon uppercase">// Network Architecture</span>
+        <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 leading-tight">Trace the path <span class="grad-text">a packet takes.</span></h2>
+        <p class="text-[#a79bd1] mt-4">Dual-ISP uplinks, load-balanced and policy-routed through the firewall to the core — hover any node for its role.</p>
+      </div>
+
+      <div class="relative glass rounded-[1.75rem] p-4 md:p-8 reveal-up overflow-hidden">
+        <svg id="topoSvg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet" class="w-full h-auto" aria-label="Network topology: dual ISP, firewall, core router"></svg>
+        <div id="topoTooltip" class="absolute pointer-events-none opacity-0 -translate-y-2 transition-all duration-200 glass gold-frame rounded-xl px-4 py-3 max-w-[220px] z-10">
+          <div id="topoTooltipTitle" class="font-mono text-xs text-teal-neon tracking-wide mb-1"></div>
+          <div id="topoTooltipBody" class="text-xs text-[#c9c1e8] leading-relaxed"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#120327" d="M0,60 C400,0 1040,100 1440,30 L1440,100 L0,100 Z"></path></svg>
+  </div>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience" class="relative px-6 py-24 md:py-32" style="background:#120327;">
+    <div class="max-w-5xl mx-auto">
+      <div class="max-w-xl mb-16 reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-teal-neon uppercase">// Experience</span>
+        <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 leading-tight">Built under <span class="grad-text">real conditions.</span></h2>
+      </div>
+
+      <div class="relative pl-10 md:pl-14">
+        <div class="timeline-line absolute left-[7px] md:left-[11px] top-2 bottom-2 w-[2px]"></div>
+
+        <!-- SNGCE -->
+        <div class="timeline-item relative pb-16 reveal-up">
+          <span class="absolute -left-10 md:-left-14 top-1 w-4 h-4 rounded-full bg-cosmic-void border-2 border-teal-neon"></span>
+          <span class="inline-block font-mono text-[11px] tracking-widest text-teal-neon border border-teal-neon/40 rounded-full px-3 py-1 mb-3">JUNE 2026 — PRESENT</span>
+          <h3 class="font-display font-semibold text-xl md:text-2xl mb-1">IT Systems Engineer</h3>
+          <p class="text-lav-soft text-sm mb-4">Sree Narayana Gurukulam College of Engineering (SNGCE)</p>
+          <ul class="space-y-2 text-[#c9c1e8] text-sm max-w-2xl">
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-teal-neon shrink-0 mt-0.5"></i>Planned and designed campus network architecture, including VLAN segmentation, improving traffic isolation, security and scalability across departments.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-teal-neon shrink-0 mt-0.5"></i>Deployed and administered Palo Alto next-generation firewalls, configuring security policies, zones and threat prevention profiles.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-teal-neon shrink-0 mt-0.5"></i>Configured QoS, load balancing and Policy-Based Forwarding (PBF) across multiple ISP links to increase uplink redundancy and uptime.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-teal-neon shrink-0 mt-0.5"></i>Set up centralized file server infrastructure for secure, role-based document storage across departments.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-teal-neon shrink-0 mt-0.5"></i>Deployed virtualization infrastructure to consolidate physical servers and simplify disaster recovery.</li>
+          </ul>
+        </div>
+
+        <!-- Aries Group -->
+        <div class="timeline-item relative pb-16 reveal-up">
+          <span class="absolute -left-10 md:-left-14 top-1 w-4 h-4 rounded-full bg-cosmic-void border-2 border-lav-soft"></span>
+          <span class="inline-block font-mono text-[11px] tracking-widest text-lav-soft border border-lav-soft/40 rounded-full px-3 py-1 mb-3">SEPT 2023 — FEB 2026</span>
+          <h3 class="font-display font-semibold text-xl md:text-2xl mb-1">IT Administrator</h3>
+          <p class="text-lav-soft text-sm mb-4">Aries Group of Companies · Doha, Qatar</p>
+          <ul class="space-y-2 text-[#c9c1e8] text-sm max-w-2xl">
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-lav-soft shrink-0 mt-0.5"></i>Single-handedly managed IT operations across 3 offices and 200+ endpoints, delivering reliable daily IT service for 300+ staff.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-lav-soft shrink-0 mt-0.5"></i>Administered LAN/WAN infrastructure including DHCP and DNS services, resolving connectivity issues to minimize downtime.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-lav-soft shrink-0 mt-0.5"></i>Implemented endpoint security policies, antivirus deployment and a regular patch management cadence.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-lav-soft shrink-0 mt-0.5"></i>Directed data backup operations and disaster recovery readiness planning for critical systems.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-lav-soft shrink-0 mt-0.5"></i>Negotiated hardware/software procurement, licensing and warranty support — cutting procurement costs by 30%.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-lav-soft shrink-0 mt-0.5"></i>Built PowerShell automation for recurring IT tasks, reducing ticket resolution time by 30%.</li>
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-lav-soft shrink-0 mt-0.5"></i>Authored IT policies, SOPs, troubleshooting guides and asset inventories to standardize operations.</li>
+          </ul>
+        </div>
+
+        <!-- Cyber Crime Police Station -->
+        <div class="timeline-item relative reveal-up">
+          <span class="absolute -left-10 md:-left-14 top-1 w-4 h-4 rounded-full bg-cosmic-void border-2 border-teal-neon"></span>
+          <span class="inline-block font-mono text-[11px] tracking-widest text-teal-neon border border-teal-neon/40 rounded-full px-3 py-1 mb-3">JULY 2023</span>
+          <h3 class="font-display font-semibold text-xl md:text-2xl mb-1">IT Intern</h3>
+          <p class="text-lav-soft text-sm mb-4">Cyber Crime Police Station, Aluva</p>
+          <ul class="space-y-2 text-[#c9c1e8] text-sm max-w-2xl">
+            <li class="flex gap-3"><i data-lucide="chevron-right" class="w-4 h-4 text-teal-neon shrink-0 mt-0.5"></i>Assisted in cyber forensics casework, gaining hands-on exposure to digital evidence handling and investigative procedures.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#0a0116" d="M0,50 C480,120 960,0 1440,60 L1440,100 L0,100 Z"></path></svg>
+  </div>
+
+  <!-- ================= ACHIEVEMENTS / IMPACT ================= -->
+  <section id="achievements" class="relative px-6 py-24 md:py-32">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-xl mb-16 reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-lav-soft uppercase">// Measurable Impact</span>
+        <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 leading-tight">Numbers that <span class="grad-text">back it up.</span></h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-8 text-center reveal-up">
+          <div class="font-display font-bold text-4xl text-teal-neon count-up" data-count="30" data-suffix="%">0</div>
+          <p class="text-sm text-[#a79bd1] mt-3">Reduction in ticket resolution time via PowerShell automation</p>
+        </div>
+        <div class="glass rounded-2xl p-8 text-center reveal-up">
+          <div class="font-display font-bold text-4xl text-lav-soft count-up" data-count="30" data-suffix="%">0</div>
+          <p class="text-sm text-[#a79bd1] mt-3">Cut in procurement costs through vendor negotiation</p>
+        </div>
+        <div class="glass rounded-2xl p-8 text-center reveal-up">
+          <div class="font-display font-bold text-4xl text-teal-neon count-up" data-count="200" data-suffix="+">0</div>
+          <p class="text-sm text-[#a79bd1] mt-3">Endpoints managed single-handedly across 3 offices</p>
+        </div>
+        <div class="glass rounded-2xl p-8 text-center reveal-up">
+          <div class="font-display font-bold text-4xl text-lav-soft count-up" data-count="300" data-suffix="+">0</div>
+          <p class="text-sm text-[#a79bd1] mt-3">Staff members supported with daily IT service</p>
+        </div>
+        <div class="glass rounded-2xl p-8 text-center reveal-up">
+          <div class="font-display font-bold text-4xl text-teal-neon count-up" data-count="3">0</div>
+          <p class="text-sm text-[#a79bd1] mt-3">Offices run without centralized Active Directory</p>
+        </div>
+        <div class="glass rounded-2xl p-8 text-center reveal-up">
+          <div class="font-display font-bold text-4xl text-lav-soft count-up" data-count="3">0</div>
+          <p class="text-sm text-[#a79bd1] mt-3">Years+ across network engineering &amp; cyber forensics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#120327" d="M0,30 C360,100 1080,0 1440,70 L1440,100 L0,100 Z"></path></svg>
+  </div>
+
+  <!-- ================= EDUCATION & CERTIFICATIONS ================= -->
+  <section id="education" class="relative px-6 py-24 md:py-32" style="background:#120327;">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14">
+
+      <div class="reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-teal-neon uppercase">// Education</span>
+        <h2 class="font-display font-bold text-3xl mt-4 mb-8 leading-tight">Foundation</h2>
+
+        <div class="space-y-6">
+          <div class="glass rounded-2xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 rounded-xl icon-chip flex items-center justify-center shrink-0">
+                <i data-lucide="graduation-cap" class="w-5 h-5 text-teal-neon"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold">Bachelor of Science, Cyber Forensics</h3>
+                <p class="text-sm text-lav-soft mt-1">Mahatma Gandhi University, Kochi, India</p>
+                <p class="text-xs font-mono text-[#8f83b8] mt-1">July 2020 — April 2023</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 rounded-xl icon-chip flex items-center justify-center shrink-0">
+                <i data-lucide="book-open" class="w-5 h-5 text-lav-soft"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold">Higher Secondary (Class XII)</h3>
+                <p class="text-sm text-lav-soft mt-1">Kendriya Vidyalaya No. 1, Kochi, India</p>
+                <p class="text-xs font-mono text-[#8f83b8] mt-1">March 2020</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-up">
+        <span class="font-mono text-xs tracking-[0.25em] text-lav-soft uppercase">// Certifications</span>
+        <h2 class="font-display font-bold text-3xl mt-4 mb-8 leading-tight">Verified</h2>
+
+        <div class="space-y-3">
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">CompTIA A+ Cyber</span>
+            <span class="text-xs font-mono text-teal-neon whitespace-nowrap">CompTIA · Mar 2025</span>
+          </div>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">Technical Support Fundamentals</span>
+            <span class="text-xs font-mono text-lav-soft whitespace-nowrap">Google · Jul 2024</span>
+          </div>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">Foundations of Cybersecurity</span>
+            <span class="text-xs font-mono text-teal-neon whitespace-nowrap">Google · Aug 2023</span>
+          </div>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">Play It Safe: Manage Security Risks</span>
+            <span class="text-xs font-mono text-lav-soft whitespace-nowrap">Google · Oct 2023</span>
+          </div>
+          <div class="glass rounded-xl px-5 py-4 flex items-center gap-4">
+            <i data-lucide="award" class="w-4 h-4 text-gold shrink-0"></i>
+            <span class="text-sm font-medium flex-1">EFFISM Professional Education Training</span>
+            <span class="text-xs font-mono text-teal-neon whitespace-nowrap">Aries Group · Oct 2023</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#0a0116" d="M0,70 C400,0 1040,100 1440,20 L1440,100 L0,100 Z"></path></svg>
+  </div>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="relative px-6 py-28 md:py-36 overflow-hidden">
+    <div class="absolute inset-0 z-0 editorial-bg" style="background-image:url('https://picsum.photos/seed/anaswar-datacenter/1600/900');"></div>
+    <div class="editorial-scrim z-0" style="background:linear-gradient(180deg, #0a0116 0%, rgba(10,1,22,0.92) 30%, rgba(10,1,22,0.92) 70%, #0a0116 100%);"></div>
+    <div class="max-w-3xl mx-auto text-center reveal-up relative z-10 gold-frame rounded-[2rem] glass px-8 py-14 md:px-16 md:py-16">
+      <span class="font-mono text-xs tracking-[0.25em] text-gold-soft uppercase">// Contact</span>
+      <h2 class="font-display font-bold text-3xl md:text-5xl mt-4 mb-6 leading-tight">
+        LET'S BUILD SOMETHING <span class="grad-gold font-serif-italic">Secure.</span>
+      </h2>
+      <p class="text-[#c9c1e8] max-w-lg mx-auto mb-12">
+        Have an infrastructure challenge, a network project, or a cybersecurity problem worth solving? I'd like to hear about it.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+        <a href="mailto:anaswar@roronoa.in" class="magnetic btn-primary flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm">
+          <i data-lucide="mail" class="w-4 h-4"></i> Email Me
         </a>
-        <a href="#contact" class="btn btn-ghost magnetic">
-          <span>Get In Touch</span>
+        <a href="tel:+918289917128" class="magnetic btn-ghost flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm">
+          <i data-lucide="phone" class="w-4 h-4"></i> +91 82899 17128
+        </a>
+        <a href="https://github.com/anaswarambali" target="_blank" rel="noopener" class="magnetic btn-ghost flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm">
+          <i data-lucide="github" class="w-4 h-4"></i> GitHub
+        </a>
+        <a href="https://www.roronoa.in" target="_blank" rel="noopener" class="magnetic btn-ghost flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm">
+          <i data-lucide="globe" class="w-4 h-4"></i> roronoa.in
         </a>
       </div>
-    </div>
 
-    <div class="hero-scroll-cue" aria-hidden="true">
-      <span class="mono">SCROLL</span>
-      <div class="hero-scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section class="section" id="about">
-    <div class="section-inner">
-      <div class="section-head reveal-up">
-        <span class="eyebrow mono">// 01 · ABOUT</span>
-        <h2>Infrastructure is a system of trust.</h2>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-copy reveal-up">
-          <p class="lede">I'm a hands-on IT Systems Engineer who designs, deploys and hardens the infrastructure organizations run on — networks, servers, storage and the security layer that holds them together.</p>
-          <p>Currently operating as the sole IT Systems Engineer at <strong>Aries Group of Companies</strong>, Doha, Qatar — owning everything from core routing and enterprise Wi-Fi to firewall policy, virtualization and monitoring, end to end, with no safety net and no room for guesswork.</p>
-          <p>I hold a B.Sc. in Cyber Forensics, and I keep a running list of Google certifications in cybersecurity and technical support — because infrastructure work rewards people who never stop verifying their assumptions.</p>
-
-          <div class="about-facts">
-            <div class="about-fact">
-              <span class="about-fact-num mono" data-count="1">0</span>
-              <span class="about-fact-label">Engineer running full-stack infra, solo</span>
-            </div>
-            <div class="about-fact">
-              <span class="about-fact-num mono" data-count="2.5" data-suffix="+">0</span>
-              <span class="about-fact-label">Years hardening enterprise systems</span>
-            </div>
-            <div class="about-fact">
-              <span class="about-fact-num mono" data-count="24" data-suffix="/7">0</span>
-              <span class="about-fact-label">Uptime accountability</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-card reveal-up">
-          <div class="profile-card-head">
-            <span class="mono">whoami --verbose</span>
-            <span class="status-dot status-dot-sm"></span>
-          </div>
-          <ul class="profile-list">
-            <li><span>IT Infrastructure</span><i></i></li>
-            <li><span>Network Architecture</span><i></i></li>
-            <li><span>Cybersecurity</span><i></i></li>
-            <li><span>Systems Administration</span><i></i></li>
-            <li><span>Network Security</span><i></i></li>
-            <li><span>Infrastructure Automation</span><i></i></li>
-          </ul>
-          <div class="profile-card-foot mono">
-            <span>base: Kochi, IN</span>
-            <span>role: Doha, QA</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ TECHNICAL ARSENAL ============ -->
-  <section class="section section-alt" id="arsenal">
-    <div class="section-inner">
-      <div class="section-head reveal-up">
-        <span class="eyebrow mono">// 02 · TECHNICAL ARSENAL</span>
-        <h2>Every layer of the stack, covered.</h2>
-      </div>
-
-      <div class="arsenal-grid">
-
-        <div class="arsenal-card reveal-up">
-          <div class="arsenal-card-head">
-            <span class="arsenal-icon" data-icon="networking"></span>
-            <h3>Networking</h3>
-          </div>
-          <ul class="tag-list">
-            <li>Palo Alto Networks</li>
-            <li>Netgear</li>
-            <li>SonicWall</li>
-            <li>VLAN</li>
-            <li>STP</li>
-            <li>Routing &amp; Switching</li>
-            <li>Enterprise Wi-Fi</li>
-          </ul>
-        </div>
-
-        <div class="arsenal-card reveal-up">
-          <div class="arsenal-card-head">
-            <span class="arsenal-icon" data-icon="infra"></span>
-            <h3>Infrastructure</h3>
-          </div>
-          <ul class="tag-list">
-            <li>Proxmox</li>
-            <li>TrueNAS</li>
-            <li>Synology</li>
-            <li>Zentyal</li>
-            <li>Windows Server</li>
-          </ul>
-        </div>
-
-        <div class="arsenal-card reveal-up">
-          <div class="arsenal-card-head">
-            <span class="arsenal-icon" data-icon="monitoring"></span>
-            <h3>Monitoring</h3>
-          </div>
-          <ul class="tag-list">
-            <li>Zabbix</li>
-            <li>Grafana</li>
-            <li>Prometheus</li>
-          </ul>
-        </div>
-
-        <div class="arsenal-card reveal-up">
-          <div class="arsenal-card-head">
-            <span class="arsenal-icon" data-icon="systems"></span>
-            <h3>Systems &amp; Platforms</h3>
-          </div>
-          <ul class="tag-list">
-            <li>NocoBase</li>
-            <li>Microsoft Technologies</li>
-            <li>SharePoint</li>
-            <li>Enterprise IT Systems</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ NETWORK TOPOLOGY ============ -->
-  <section class="section" id="topology">
-    <div class="section-inner">
-      <div class="section-head reveal-up">
-        <span class="eyebrow mono">// 03 · NETWORK ARCHITECTURE</span>
-        <h2>Trace the path a packet actually takes.</h2>
-        <p class="section-sub">Hover any node for its role in the stack. This is the same layered path traffic follows in a segmented enterprise network.</p>
-      </div>
-
-      <div class="topo-wrap reveal-up">
-        <svg id="topoSvg" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid meet" aria-label="Enterprise network topology diagram"></svg>
-        <div class="topo-tooltip" id="topoTooltip">
-          <div class="topo-tooltip-title mono"></div>
-          <div class="topo-tooltip-body"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ EXPERIENCE ============ -->
-  <section class="section section-alt" id="experience">
-    <div class="section-inner">
-      <div class="section-head reveal-up">
-        <span class="eyebrow mono">// 04 · EXPERIENCE</span>
-        <h2>Built under real operating conditions.</h2>
-      </div>
-
-      <div class="timeline">
-
-        <div class="timeline-item reveal-up">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <span class="mono timeline-tag">ONGOING</span>
-            <h3>IT Systems Engineer — Aries Group of Companies</h3>
-            <span class="timeline-meta">Doha, Qatar</span>
-            <p>Sole IT Systems Engineer responsible for the organization's entire technology footprint — network, servers, storage, security and monitoring — with full ownership from architecture to on-call troubleshooting.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-up">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <span class="mono timeline-tag">INFRASTRUCTURE</span>
-            <h3>Network &amp; Wi-Fi architecture overhaul</h3>
-            <span class="timeline-meta">LAN / WAN / Wireless</span>
-            <p>Re-architected routing, switching and VLAN segmentation, and rolled out enterprise Wi-Fi with roaming and performance tuning across the organization's user base.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-up">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <span class="mono timeline-tag">SECURITY</span>
-            <h3>Network security &amp; access-control hardening</h3>
-            <span class="timeline-meta">Firewall / Segmentation / ACLs</span>
-            <p>Implemented firewall policy, network segmentation and access control lists to reduce attack surface, paired with a VAPT-driven approach to closing gaps proactively.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-up">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <span class="mono timeline-tag">RELIABILITY</span>
-            <h3>Virtualization, storage &amp; backup infrastructure</h3>
-            <span class="timeline-meta">Proxmox / TrueNAS / Synology</span>
-            <p>Deployed a virtualization and storage backbone with structured backup and disaster-recovery processes to keep critical services recoverable.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-up">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <span class="mono timeline-tag">VISIBILITY</span>
-            <h3>Monitoring stack &amp; vendor coordination</h3>
-            <span class="timeline-meta">Zabbix / Grafana / Prometheus</span>
-            <p>Stood up full-stack monitoring for early fault detection, while coordinating vendors and procurement to keep infrastructure projects on schedule and on budget.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-up">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <span class="mono timeline-tag">FOUNDATION</span>
-            <h3>B.Sc. Cyber Forensics · CompTIA A+</h3>
-            <span class="timeline-meta">Continuous certification</span>
-            <p>Built a forensics-first foundation in how systems fail and get compromised, backed by CompTIA A+ and an ongoing set of Google certifications in cybersecurity and technical support.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROJECTS ============ -->
-  <section class="section" id="projects">
-    <div class="section-inner">
-      <div class="section-head reveal-up">
-        <span class="eyebrow mono">// 05 · PROJECTS</span>
-        <h2>Infrastructure I've designed and shipped.</h2>
-      </div>
-
-      <div class="projects-grid">
-
-        <article class="project-card reveal-up" data-expand>
-          <div class="project-card-visual" data-motif="network"></div>
-          <div class="project-card-body">
-            <h3>Enterprise Network Architecture</h3>
-            <p class="project-card-desc">Design and deployment of scalable LAN/WAN infrastructure with routing, switching and VLAN segmentation.</p>
-            <div class="tag-row"><span>Routing</span><span>Switching</span><span>VLAN</span><span>STP</span></div>
-            <div class="project-card-details">
-              <p>Planned and deployed a segmented core-to-access network topology, replacing flat, unmanaged switching with structured VLANs, spanning-tree hardening and documented routing paths — cutting broadcast domains and isolating traffic by function.</p>
-            </div>
-            <button class="project-expand mono" aria-expanded="false">View details <span>+</span></button>
-          </div>
-        </article>
-
-        <article class="project-card reveal-up" data-expand>
-          <div class="project-card-visual" data-motif="wifi"></div>
-          <div class="project-card-body">
-            <h3>Enterprise Wi-Fi Infrastructure</h3>
-            <p class="project-card-desc">Wireless deployment, VLAN integration, roaming and performance optimization.</p>
-            <div class="tag-row"><span>Wi-Fi</span><span>Roaming</span><span>VLAN</span><span>Netgear</span></div>
-            <div class="project-card-details">
-              <p>Deployed enterprise-grade access points with VLAN-mapped SSIDs, tuned channel planning and roaming for seamless coverage across the site, monitored through Netgear Insight for ongoing performance visibility.</p>
-            </div>
-            <button class="project-expand mono" aria-expanded="false">View details <span>+</span></button>
-          </div>
-        </article>
-
-        <article class="project-card reveal-up" data-expand>
-          <div class="project-card-visual" data-motif="shield"></div>
-          <div class="project-card-body">
-            <h3>Network Security Architecture</h3>
-            <p class="project-card-desc">Firewall, segmentation, access control and security-focused infrastructure.</p>
-            <div class="tag-row"><span>Palo Alto</span><span>SonicWall</span><span>ACLs</span><span>VAPT</span></div>
-            <div class="project-card-details">
-              <p>Built layered firewall policy across Palo Alto and SonicWall appliances, enforced least-privilege ACLs between segments, and ran VAPT-informed reviews to close exposure before it became incident response.</p>
-            </div>
-            <button class="project-expand mono" aria-expanded="false">View details <span>+</span></button>
-          </div>
-        </article>
-
-        <article class="project-card reveal-up" data-expand>
-          <div class="project-card-visual" data-motif="monitor"></div>
-          <div class="project-card-body">
-            <h3>Infrastructure Monitoring</h3>
-            <p class="project-card-desc">Monitoring infrastructure using Zabbix, Grafana and Prometheus.</p>
-            <div class="tag-row"><span>Zabbix</span><span>Grafana</span><span>Prometheus</span></div>
-            <div class="project-card-details">
-              <p>Instrumented servers, network devices and services with Zabbix and Prometheus, surfaced through Grafana dashboards — turning "something feels slow" into an alert with a root cause attached.</p>
-            </div>
-            <button class="project-expand mono" aria-expanded="false">View details <span>+</span></button>
-          </div>
-        </article>
-
-        <article class="project-card reveal-up" data-expand>
-          <div class="project-card-visual" data-motif="storage"></div>
-          <div class="project-card-body">
-            <h3>Virtualization &amp; Storage</h3>
-            <p class="project-card-desc">Infrastructure using Proxmox, TrueNAS and Synology.</p>
-            <div class="tag-row"><span>Proxmox</span><span>TrueNAS</span><span>Synology</span><span>Backup</span></div>
-            <div class="project-card-details">
-              <p>Consolidated physical sprawl onto a Proxmox virtualization layer, backed by TrueNAS and Synology storage with a tiered backup and disaster-recovery strategy for critical workloads.</p>
-            </div>
-            <button class="project-expand mono" aria-expanded="false">View details <span>+</span></button>
-          </div>
-        </article>
-
-        <article class="project-card reveal-up" data-expand>
-          <div class="project-card-visual" data-motif="systems"></div>
-          <div class="project-card-body">
-            <h3>NocoBase / IT Systems</h3>
-            <p class="project-card-desc">Building and integrating practical business/IT management systems.</p>
-            <div class="tag-row"><span>NocoBase</span><span>SharePoint</span><span>Automation</span></div>
-            <div class="project-card-details">
-              <p>Built internal tools on NocoBase and SharePoint to track assets, tickets and infrastructure changes — replacing spreadsheet sprawl with systems the rest of the org can actually rely on.</p>
-            </div>
-            <button class="project-expand mono" aria-expanded="false">View details <span>+</span></button>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CYBERSECURITY ============ -->
-  <section class="section section-security" id="security">
-    <div class="section-inner">
-      <div class="section-head reveal-up">
-        <span class="eyebrow mono eyebrow-alert">// 06 · CYBERSECURITY</span>
-        <h2>Assume breach. Design accordingly.</h2>
-      </div>
-
-      <div class="security-grid">
-        <div class="security-terminal reveal-up">
-          <div class="terminal-bar">
-            <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
-            <span class="mono terminal-title">security-audit.sh</span>
-          </div>
-          <div class="terminal-body mono" id="terminalBody"></div>
-        </div>
-
-        <div class="security-tags reveal-up">
-          <span class="sec-tag">Network Security</span>
-          <span class="sec-tag">Vulnerability Assessment</span>
-          <span class="sec-tag">VAPT</span>
-          <span class="sec-tag">Security Hardening</span>
-          <span class="sec-tag">Firewall Architecture</span>
-          <span class="sec-tag">Network Segmentation</span>
-          <span class="sec-tag">Infrastructure Security</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SKILLS VISUALIZATION ============ -->
-  <section class="section" id="skills">
-    <div class="section-inner">
-      <div class="section-head reveal-up">
-        <span class="eyebrow mono">// 07 · SKILLS MAP</span>
-        <h2>How the disciplines connect.</h2>
-        <p class="section-sub">Select a node to see what it draws on.</p>
-      </div>
-
-      <div class="skills-wrap reveal-up">
-        <svg id="skillsSvg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" aria-label="Skills relationship map"></svg>
-        <div class="skills-detail" id="skillsDetail">
-          <span class="mono skills-detail-hint">Select a discipline above</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section class="section section-contact" id="contact">
-    <div class="section-inner">
-      <div class="contact-box reveal-up">
-        <span class="eyebrow mono">// 08 · CONTACT</span>
-        <h2>LET'S BUILD SOMETHING SECURE.</h2>
-        <p class="contact-copy">Have an infrastructure challenge, network project, or cybersecurity idea? Let's connect.</p>
-
-        <div class="contact-actions">
-          <a href="mailto:anaswar@roronoa.in" class="btn btn-primary magnetic">
-            <span>Email Me</span>
-          </a>
-          <a href="https://in.linkedin.com/in/anaswarambali" target="_blank" rel="noopener" class="btn btn-ghost magnetic">
-            <span>LinkedIn</span>
-          </a>
-          <a href="https://github.com/anaswarambali" target="_blank" rel="noopener" class="btn btn-ghost magnetic">
-            <span>GitHub</span>
-          </a>
-        </div>
+      <div class="flex items-center justify-center gap-2 text-xs font-mono text-[#8f83b8]">
+        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Kochi, India
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="footer">
-  <div class="footer-inner mono">
+<footer class="relative z-10 border-t border-white/5 py-8 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-[#6d5f99]">
     <span>© <span id="year"></span> Anaswar A Ambali</span>
-    <span class="footer-status"><span class="status-dot status-dot-sm"></span>ALL SYSTEMS NOMINAL</span>
+    <span class="flex items-center gap-2 text-teal-neon"><span class="w-1.5 h-1.5 rounded-full bg-teal-neon pulse-dot"></span> ALL SYSTEMS NOMINAL</span>
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  lucide.createIcons();
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------------- NAV background on scroll ---------------- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30){
+      nav.classList.add('bg-[#0a0116]/80','backdrop-blur-xl','border-b','border-white/5');
+    } else {
+      nav.classList.remove('bg-[#0a0116]/80','backdrop-blur-xl','border-b','border-white/5');
+    }
+  });
+
+  /* ---------------- HERO ENTRANCE ---------------- */
+  if (!reduceMotion){
+    const heroTl = gsap.timeline({ defaults:{ ease:'power4.out' } });
+    heroTl
+      .to('#heroStatus', { opacity:1, y:0, duration:0.8 }, 0.1)
+      .fromTo('#heroLine1', { opacity:0, y:60, filter:'blur(8px)' }, { opacity:1, y:0, filter:'blur(0px)', duration:1.1 }, 0.25)
+      .fromTo('#heroLine2', { opacity:0, y:60, filter:'blur(8px)' }, { opacity:1, y:0, filter:'blur(0px)', duration:1.1 }, 0.4)
+      .fromTo('#heroGoldLine', { opacity:0, scaleX:0 }, { opacity:1, scaleX:1, duration:0.8 }, 0.6)
+      .to('#heroRole', { opacity:1, y:0, duration:0.9 }, 0.65)
+      .to('#heroTagline', { opacity:1, y:0, duration:0.9 }, 0.8)
+      .to('#heroCta', { opacity:1, y:0, duration:0.9 }, 0.95);
+
+    gsap.set(['#heroStatus','#heroRole','#heroTagline','#heroCta'], { y:20 });
+  } else {
+    document.querySelectorAll('.reveal-init').forEach(el => el.style.opacity = 1);
+  }
+
+  /* ---------------- SCROLL REVEALS ---------------- */
+  gsap.utils.toArray('.reveal-up').forEach((el, i) => {
+    gsap.fromTo(el, { opacity:0, y:50 }, {
+      opacity:1, y:0, duration:1, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 85%', toggleActions:'play none none none' }
+    });
+  });
+
+  /* stagger skill cards */
+  gsap.utils.toArray('#skillsGrid .skill-card').forEach((card, i) => {
+    gsap.fromTo(card, { opacity:0, y:60, scale:0.94 }, {
+      opacity:1, y:0, scale:1, duration:0.8, ease:'power3.out', delay:(i % 3) * 0.08,
+      scrollTrigger:{ trigger:card, start:'top 88%' }
+    });
+  });
+
+  /* timeline items stagger */
+  gsap.utils.toArray('.timeline-item').forEach((item) => {
+    gsap.fromTo(item, { opacity:0, x:-40 }, {
+      opacity:1, x:0, duration:0.9, ease:'power3.out',
+      scrollTrigger:{ trigger:item, start:'top 85%' }
+    });
+  });
+
+  /* ---------------- PARALLAX BLOBS ---------------- */
+  gsap.utils.toArray('.blob').forEach((blob, i) => {
+    gsap.to(blob, {
+      y: (i % 2 === 0 ? -80 : 80),
+      ease:'none',
+      scrollTrigger:{ trigger: document.body, start:'top top', end:'bottom bottom', scrub:1.2 }
+    });
+  });
+
+  /* ---------------- COUNT-UP NUMBERS ---------------- */
+  document.querySelectorAll('.count-up').forEach(el => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        const target = parseFloat(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target, duration: 1.6, ease:'power2.out',
+          onUpdate: () => { el.textContent = Math.round(obj.val) + suffix; }
+        });
+      }
+    });
+  });
+
+  /* ---------------- MAGNETIC BUTTONS ---------------- */
+  if (!reduceMotion && matchMedia('(hover: hover)').matches){
+    document.querySelectorAll('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        gsap.to(btn, { x: x * 0.25, y: y * 0.4, duration: 0.4, ease:'power3.out' });
+      });
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease:'elastic.out(1,0.4)' });
+      });
+    });
+  }
+
+  /* ---------------- CARD TILT (about photo card) ---------------- */
+  if (!reduceMotion && matchMedia('(hover: hover)').matches){
+    document.querySelectorAll('.card-3d').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        gsap.to(card, { rotateY: px * 10, rotateX: -py * 10, duration: 0.4, transformPerspective: 800 });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease:'power3.out' });
+      });
+    });
+  }
+
+  /* ---------------- NETWORK TOPOLOGY DIAGRAM ---------------- */
+  (function buildTopology(){
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.getElementById('topoSvg');
+    const tooltip = document.getElementById('topoTooltip');
+    const tooltipTitle = document.getElementById('topoTooltipTitle');
+    const tooltipBody = document.getElementById('topoTooltipBody');
+    if (!svg) return;
+
+    const nodes = [
+      { id:'isp1',     label:'ISP 1',        x:90,  y:170, title:'ISP 1', desc:'Primary internet uplink — load-balanced with ISP 2 across active WAN links.' },
+      { id:'isp2',     label:'ISP 2',        x:90,  y:430, title:'ISP 2', desc:'Secondary uplink providing failover and extra bandwidth via Policy-Based Forwarding.' },
+      { id:'firewall', label:'Firewall',     x:330, y:300, title:'Firewall', desc:'Palo Alto next-gen firewall enforcing security zones and threat prevention across both uplinks.' },
+      { id:'core',     label:'Router / Core',x:560, y:300, title:'Router / Core', desc:'Core routing layer applying QoS and directing traffic to every distribution segment.' },
+      { id:'dist1',    label:'Distribution', x:800, y:150, title:'VLAN Segmentation', desc:'Distribution switching enforcing VLAN boundaries for the server and wireless segments.' },
+      { id:'dist2',    label:'Distribution', x:800, y:450, title:'VLAN Segmentation', desc:'A second distribution path for redundancy and isolated broadcast domains.' },
+      { id:'servers',  label:'Servers',      x:1040,y:90,  title:'Server Infrastructure', desc:'Virtualized servers and centralized, role-based file storage.' },
+      { id:'wifi',     label:'Wi-Fi APs',    x:1040,y:230, title:'Wireless Network', desc:'Enterprise access points with VLAN-mapped SSIDs and roaming.' },
+      { id:'monitor',  label:'Monitoring',   x:1040,y:370, title:'Monitoring', desc:'Network and asset monitoring watching every layer for faults and drift.' },
+      { id:'users',    label:'End Users',    x:1040,y:510, title:'End Users', desc:'Staff and department endpoints, segmented onto the appropriate VLAN.' },
+    ];
+    const edges = [
+      ['isp1','firewall'], ['isp2','firewall'],
+      ['firewall','core'],
+      ['core','dist1'], ['core','dist2'],
+      ['dist1','servers'], ['dist1','wifi'],
+      ['dist2','monitor'], ['dist2','users'],
+    ];
+    const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const edgesGroup = document.createElementNS(svgNS,'g');
+    const packetsGroup = document.createElementNS(svgNS,'g');
+    const nodesGroup = document.createElementNS(svgNS,'g');
+
+    edges.forEach(([a,b], i) => {
+      const na = byId[a], nb = byId[b];
+      const midX = (na.x + nb.x) / 2;
+      const d = `M ${na.x} ${na.y} C ${midX} ${na.y}, ${midX} ${nb.y}, ${nb.x} ${nb.y}`;
+      const path = document.createElementNS(svgNS,'path');
+      path.setAttribute('d', d);
+      path.setAttribute('id', `netedge-${i}`);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'rgba(201,182,255,0.22)');
+      path.setAttribute('stroke-width', '1.4');
+      edgesGroup.appendChild(path);
+
+      if (!reduce){
+        const packet = document.createElementNS(svgNS,'circle');
+        packet.setAttribute('r', 3);
+        packet.setAttribute('fill', '#2dd9c8');
+        packet.style.filter = 'drop-shadow(0 0 5px #2dd9c8)';
+        const anim = document.createElementNS(svgNS,'animateMotion');
+        anim.setAttribute('dur', `${2.6 + (i % 4) * 0.6}s`);
+        anim.setAttribute('repeatCount', 'indefinite');
+        anim.setAttribute('begin', `${(i % 5) * 0.4}s`);
+        const mpath = document.createElementNS(svgNS,'mpath');
+        mpath.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#netedge-${i}`);
+        mpath.setAttribute('href', `#netedge-${i}`);
+        anim.appendChild(mpath);
+        packet.appendChild(anim);
+        packetsGroup.appendChild(packet);
+      }
+    });
+
+    nodes.forEach(n => {
+      const g = document.createElementNS(svgNS,'g');
+      g.style.cursor = 'pointer';
+      g.setAttribute('tabindex','0');
+      g.setAttribute('role','button');
+      g.setAttribute('aria-label', n.title);
+
+      const glow = document.createElementNS(svgNS,'circle');
+      glow.setAttribute('cx', n.x); glow.setAttribute('cy', n.y); glow.setAttribute('r', 20);
+      glow.setAttribute('fill', 'rgba(45,217,200,0.07)');
+
+      const core = document.createElementNS(svgNS,'circle');
+      core.setAttribute('cx', n.x); core.setAttribute('cy', n.y); core.setAttribute('r', 8);
+      core.setAttribute('fill', '#120327');
+      core.setAttribute('stroke', '#2dd9c8');
+      core.setAttribute('stroke-width', '1.8');
+      core.style.transition = 'filter .3s, r .3s';
+
+      const label = document.createElementNS(svgNS,'text');
+      label.setAttribute('x', n.x);
+      label.setAttribute('y', n.y + 28);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('font-family', 'JetBrains Mono, monospace');
+      label.setAttribute('font-size', '12');
+      label.setAttribute('fill', '#c9c1e8');
+      label.textContent = n.label;
+
+      g.appendChild(glow); g.appendChild(core); g.appendChild(label);
+      nodesGroup.appendChild(g);
+
+      function showTip(){
+        const wrapRect = svg.closest('.glass').getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+        const scaleX = svgRect.width / 1200;
+        const scaleY = svgRect.height / 600;
+        const px = (svgRect.left - wrapRect.left) + n.x * scaleX;
+        const py = (svgRect.top - wrapRect.top) + n.y * scaleY;
+        tooltip.style.left = px + 'px';
+        tooltip.style.top = (py - 14) + 'px';
+        tooltip.style.transform = 'translate(-50%, -100%)';
+        tooltipTitle.textContent = n.title;
+        tooltipBody.textContent = n.desc;
+        tooltip.classList.remove('opacity-0');
+        tooltip.classList.add('opacity-100');
+        core.style.filter = 'drop-shadow(0 0 10px #2dd9c8)';
+      }
+      function hideTip(){
+        tooltip.classList.add('opacity-0');
+        tooltip.classList.remove('opacity-100');
+        core.style.filter = '';
+      }
+      g.addEventListener('mouseenter', showTip);
+      g.addEventListener('mouseleave', hideTip);
+      g.addEventListener('focus', showTip);
+      g.addEventListener('blur', hideTip);
+      g.addEventListener('click', showTip);
+    });
+
+    svg.appendChild(edgesGroup);
+    svg.appendChild(packetsGroup);
+    svg.appendChild(nodesGroup);
+  })();
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anaswar A Ambali | IT Administrator · Network & Systems Engineer · Cyber Security Specialist</title>
+<title>Anaswar A Ambali | Network & Systems Engineer · Cyber Security Specialist · IT Administrator </title>
 <meta name="description" content="Anaswar A Ambali — IT Administrator, Network & Systems Engineer and Cyber Security Specialist. Firewall administration, VLAN/QoS design, virtualization, disaster recovery and automation.">
 <meta name="theme-color" content="#0d0221">
 
@@ -299,6 +299,31 @@
     <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg"><path fill="#120327" d="M0,64 C240,120 480,0 720,32 C960,64 1200,120 1440,64 L1440,120 L0,120 Z"></path></svg>
   </div>
 
+  <!-- ================= CLIENTS (small strip) ================= -->
+  <section id="clients" class="relative px-6 py-10" style="background:#120327;">
+    <div class="max-w-4xl mx-auto reveal-up">
+      <p class="text-center text-[10px] font-mono tracking-[0.3em] text-[#6d5f99] uppercase mb-6">Trusted by</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-14 gap-y-6">
+        <div class="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <img src="client-ruwad-dana.png" alt="Ruwad Dana Technical Services LLC" class="h-10 w-10 object-contain rounded-full">
+          <span class="font-display text-sm text-[#c9c1e8] tracking-wide">Ruwad Dana <span class="text-[#6d5f99] font-normal">Technical Services, UAE</span></span>
+        </div>
+        <div class="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <img src="client-tsgt.png" alt="TSGT Qatar" class="h-10 w-10 object-contain">
+          <span class="font-display text-sm text-[#c9c1e8] tracking-wide">TSG Trading <span class="text-[#6d5f99] font-normal">, Qatar</span></span>
+        </div>
+        <div class="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <img src="client-gisas-homely-food.png" alt="Gisa's Homely Food" class="h-10 w-10 object-contain rounded-full">
+          <span class="font-display text-sm text-[#c9c1e8] tracking-wide">Gisa's <span class="text-[#6d5f99] font-normal">Homely Food, India</span></span>
+        </div>
+        <div class="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <img src="client-confidential.png" alt="Confidential" class="h-10 w-10 object-contain rounded-full">
+          <span class="font-display text-sm text-[#c9c1e8] tracking-wide">+ <span class="text-[#6d5f99] font-normal">Confidential Cleints</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= ABOUT ================= -->
   <section id="about" class="relative px-6 py-24 md:py-32" style="background:#120327;">
     <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-14 items-center">
@@ -341,11 +366,11 @@
           </div>
           <div class="glass rounded-xl p-4 text-center">
             <div class="font-display font-bold text-2xl text-lav-soft count-up" data-count="200">0</div>
-            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">Endpoints+</div>
+            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">*Endpoints+</div>
           </div>
           <div class="glass rounded-xl p-4 text-center">
             <div class="font-display font-bold text-2xl text-teal-neon count-up" data-count="3">0</div>
-            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">Offices</div>
+            <div class="text-[10px] text-[#a79bd1] mt-1 uppercase tracking-wide">*Offices</div>
           </div>
           <div class="glass rounded-xl p-4 text-center">
             <div class="font-display font-bold text-2xl text-lav-soft count-up" data-count="30" data-suffix="%">0</div>
@@ -579,7 +604,7 @@
                 <i data-lucide="book-open" class="w-5 h-5 text-lav-soft"></i>
               </div>
               <div>
-                <h3 class="font-display font-semibold">Higher Secondary (Class XII)</h3>
+                <h3 class="font-display font-semibold">Higher Secondary (Till Class XII)</h3>
                 <p class="text-sm text-lav-soft mt-1">Kendriya Vidyalaya No. 1, Kochi, India</p>
                 <p class="text-xs font-mono text-[#8f83b8] mt-1">March 2020</p>
               </div>
@@ -798,7 +823,7 @@
     const nodes = [
       { id:'isp1',     label:'ISP 1',        x:90,  y:170, title:'ISP 1', desc:'Primary internet uplink — load-balanced with ISP 2 across active WAN links.' },
       { id:'isp2',     label:'ISP 2',        x:90,  y:430, title:'ISP 2', desc:'Secondary uplink providing failover and extra bandwidth via Policy-Based Forwarding.' },
-      { id:'firewall', label:'Firewall',     x:330, y:300, title:'Firewall', desc:'Palo Alto next-gen firewall enforcing security zones and threat prevention across both uplinks.' },
+      { id:'firewall', label:'Firewall',     x:330, y:300, title:'Firewall', desc:'SonicWall/ Palo Alto/ Fortinet next-gen firewall enforcing security zones and threat prevention across both uplinks.' },
       { id:'core',     label:'Router / Core',x:560, y:300, title:'Router / Core', desc:'Core routing layer applying QoS and directing traffic to every distribution segment.' },
       { id:'dist1',    label:'Distribution', x:800, y:150, title:'VLAN Segmentation', desc:'Distribution switching enforcing VLAN boundaries for the server and wireless segments.' },
       { id:'dist2',    label:'Distribution', x:800, y:450, title:'VLAN Segmentation', desc:'A second distribution path for redundancy and isolated broadcast domains.' },
